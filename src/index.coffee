@@ -19,7 +19,7 @@ dump = (args)=>
         'content-type':'json'
     )
     if not r.ok
-      throw await r.text()
+      throw r
     text = await r.text()
     if text
       return JSON.parse text
