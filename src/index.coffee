@@ -8,7 +8,7 @@ dump = (args)=>
     return JSON.stringify args
   ''
 
-< (sdkUrl, Throw)=>
+< (Throw,sdkUrl)=>
 
   call = (func, args)=>
     r = await fetch(
@@ -39,9 +39,9 @@ dump = (args)=>
 
 
   [
+    proxy('')
     (s)=>
       sdkUrl = s
       return
-    proxy('')
   ]
 
