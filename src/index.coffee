@@ -8,7 +8,7 @@ dump = (args)=>
     return JSON.stringify args
   ''
 
-< (sdkUrl)=>
+< (sdkUrl, Throw)=>
 
   call = (func, args)=>
     r = await fetch(
@@ -18,8 +18,8 @@ dump = (args)=>
       headers:
         'content-type':'json'
     )
-    if not r.ok
-      throw r
+    if not [200,304].includes(r.status)
+      return Throw r
     text = await r.text()
     if text
       return JSON.parse text
