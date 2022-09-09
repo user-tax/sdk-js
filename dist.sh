@@ -19,6 +19,8 @@ min index js
 min index cjs
 cd $_DIR
 mdi
+git add -u
+git commit -m v$version || true
 npm set unsafe-perm true
 npm version patch
 git add -u
