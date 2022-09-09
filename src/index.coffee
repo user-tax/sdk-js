@@ -8,38 +8,40 @@ dump = (args)=>
     return JSON.stringify args
   ''
 
-_url = ''
+< (sdkUrl)=>
 
-call = (func, args)=>
-  r = await fetch(
-    _url+func
-    method: 'POST'
-    body: dump args
-    headers:
-      'content-type':'json'
-  )
-  if not r.ok
-    throw await r.text()
-  text = await r.text()
-  if text
-    return JSON.parse text
-  return
+  call = (func, args)=>
+    r = await fetch(
+      sdkUrl+func
+      method: 'POST'
+      body: dump args
+      headers:
+        'content-type':'json'
+    )
+    if not r.ok
+      throw await r.text()
+    text = await r.text()
+    if text
+      return JSON.parse text
+    return
 
-proxy = (prefix)=>
-  new Proxy(
-    =>
-    get:(_,key)=>
-      if prefix
-        prefix += '.'
-      proxy prefix+key
+  proxy = (prefix)=>
+    new Proxy(
+      =>
+      get:(_,key)=>
+        if prefix
+          prefix += '.'
+        proxy prefix+key
 
-    apply:(_,self,args)=>
-      call prefix, args
-  )
+      apply:(_,self,args)=>
+        call prefix, args
+    )
 
-< sdkUrl = (s)=>
-  _url = s
-  return
 
-export default proxy('')
+  [
+    (s)=>
+      sdkUrl = s
+      return
+    proxy('')
+  ]
 
