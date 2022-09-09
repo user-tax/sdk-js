@@ -1,0 +1,8 @@
+{
+  "name": "@user.tax/sdk",
+  "version": "0.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:user-tax/sdk-js",
+  "author": "usrtax <i@user.tax>",
+  "license": "MIT"
+}
