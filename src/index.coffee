@@ -1,8 +1,3 @@
-URL = ''
-
-< initApi = (url)=>
-  URL = url
-
 dump = (args)=>
   {length} = args
   if length
@@ -13,9 +8,11 @@ dump = (args)=>
     return JSON.stringify args
   ''
 
+_url = ''
+
 call = (func, args)=>
   r = await fetch(
-    URL+func
+    _url+func
     method: 'POST'
     body: dump args
     headers:
@@ -39,6 +36,10 @@ proxy = (prefix)=>
     apply:(_,self,args)=>
       call prefix, args
   )
+
+< sdkUrl = (s)=>
+  _url = s
+  return
 
 export default proxy('')
 

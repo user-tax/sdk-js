@@ -1,6 +1,6 @@
-# @iuser/aliput
+# @user.tax/sdk
 
-阿里云文件上传
+js sdk for user.tax
 
 ## 安装
 
