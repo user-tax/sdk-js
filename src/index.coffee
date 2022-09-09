@@ -29,9 +29,10 @@ dump = (args)=>
     new Proxy(
       =>
       get:(_,key)=>
-        if prefix
-          prefix += '.'
-        proxy prefix+key
+        p = prefix
+        if p
+          p += '.'
+        proxy p+key
 
       apply:(_,self,args)=>
         call prefix, args
