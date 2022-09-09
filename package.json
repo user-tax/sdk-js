@@ -17,6 +17,7 @@
     "@babel/core": "^7.19.0",
     "@babel/plugin-transform-modules-commonjs": "^7.18.6",
     "@iuser/node-loader": "^0.0.21",
-    "coffee_plus": "^0.0.39"
+    "coffee_plus": "^0.0.39",
+    "uglify-js": "^3.17.0"
   }
 }

@@ -11,7 +11,12 @@ git pull
 version=$(cat package.json|jq -r '.version')
 
 ./build.sh
-
+min(){
+bun run uglifyjs -- -o $1.min.$2 --compress --mangle --toplevel -- $1.$2
+}
+min lib/index js
+min lib/index cjs
+exit 0
 mdi
 npm set unsafe-perm true
 npm version patch
