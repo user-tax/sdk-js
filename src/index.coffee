@@ -1,3 +1,5 @@
+> msgpackr > unpack
+
 dump = (args)=>
   {length} = args
   if length
@@ -20,9 +22,9 @@ dump = (args)=>
     )
     if not [200,304].includes(r.status)
       return Throw r
-    text = await r.text()
-    if text
-      return JSON.parse text
+    bin = await r.arrayBuffer()
+    if bin
+      return unpack bin
     return
 
   proxy = (prefix)=>

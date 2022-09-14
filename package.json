@@ -19,5 +19,8 @@
     "@iuser/node-loader": "^0.0.21",
     "coffee_plus": "^0.0.39",
     "uglify-js": "^3.17.0"
+  },
+  "dependencies": {
+    "msgpackr": "^1.7.0-beta1"
   }
 }
