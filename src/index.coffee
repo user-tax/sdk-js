@@ -25,10 +25,8 @@ dump = (args)=>
     bin = await r.arrayBuffer()
 
     if bin.byteLength
-      return unpack new Uint8Array(bin), {
-        moreTypes:true
-        int64AsNumber:true
-      }
+      return unpack new Uint8Array(bin)
+    #, { moreTypes:true int64AsNumber:true }
     return
 
   proxy = (prefix)=>
