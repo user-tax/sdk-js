@@ -23,8 +23,9 @@ dump = (args)=>
     if not [200,304].includes(r.status)
       return Throw r
     bin = await r.arrayBuffer()
-    if bin
-      return unpack bin
+
+    if bin.byteLength
+      return unpack new Uint8Array(bin)
     return
 
   proxy = (prefix)=>
