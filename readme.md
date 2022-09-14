@@ -1,4 +1,4 @@
-<!-- EDIT /Users/z/user/api/sdk/js/readme.md -->
+<!-- EDIT /Users/z/user/sdk-js/readme.md -->
 
 # @user.tax/sdk
 
