@@ -10,7 +10,7 @@ dump = (args)=>
     return JSON.stringify args
   ''
 
-HEADERS = { 'content-type':'-' }
+HEADERS = { 'content-type':'' }
 
 < (Throw,sdkUrl)=>
 
