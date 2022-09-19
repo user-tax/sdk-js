@@ -10,15 +10,23 @@ dump = (args)=>
     return JSON.stringify args
   ''
 
+HEADERS = { 'content-type':'-' }
+
 < (Throw,sdkUrl)=>
 
+  + headers
+
   call = (func, args)=>
+    if headers
+      h = headers
+      headers = undefined
+    else
+      h = HEADERS
     r = await fetch(
       sdkUrl+func
       method: 'POST'
       body: dump args
-      headers:
-        'content-type':'json'
+      headers: h
     )
     if not [200,304].includes(r.status)
       return Throw r
@@ -38,10 +46,15 @@ dump = (args)=>
           p += '.'
         proxy p+key
 
+      set: (_, key, val)=>
+        if not headers
+          headers = {...HEADERS}
+        headers[key] = val
+        return
+
       apply:(_,self,args)=>
         call prefix, args
     )
-
 
   [
     proxy('')
