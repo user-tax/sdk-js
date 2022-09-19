@@ -17,9 +17,11 @@ HEADERS = { 'content-type':'' }
   call = (headers, func, args)=>
     r = await fetch(
       sdkUrl+func
-      method: 'POST'
-      body: dump args
-      headers
+      {
+        method: 'POST'
+        body: dump args
+        headers
+      }
     )
     if not [200,304].includes(r.status)
       return await Throw r, call, headers, func, args
