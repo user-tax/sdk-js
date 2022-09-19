@@ -29,7 +29,7 @@ HEADERS = { 'content-type':'' }
       headers: h
     )
     if not [200,304].includes(r.status)
-      return Throw r
+      return Throw r, func, args, call
     bin = await r.arrayBuffer()
 
     if bin.byteLength
