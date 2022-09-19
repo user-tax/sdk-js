@@ -1,6 +1,6 @@
 {
   "name": "@user.tax/sdk",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "type": "module",
   "repository": "git@github.com:user-tax/sdk-js",
   "author": "i@user.tax",
