@@ -14,28 +14,23 @@ HEADERS = { 'content-type':'' }
 
 < (Throw,sdkUrl)=>
 
-  + headers
-
-  call = (func, args)=>
-    if headers
-      h = headers
-      headers = undefined
-    else
-      h = HEADERS
+  call = (func, args, headers)=>
     r = await fetch(
       sdkUrl+func
       method: 'POST'
       body: dump args
-      headers: h
+      headers
     )
     if not [200,304].includes(r.status)
-      return Throw r, func, args, call
+      return Throw r, func, args, headers, call
     bin = await r.arrayBuffer()
 
     if bin.byteLength
       return unpack new Uint8Array(bin)
     #, { moreTypes:true int64AsNumber:true }
     return
+
+  + _headers
 
   proxy = (prefix)=>
     new Proxy(
@@ -47,13 +42,18 @@ HEADERS = { 'content-type':'' }
         proxy p+key
 
       set: (_, key, val)=>
-        if not headers
-          headers = {...HEADERS}
-        headers[key] = val
+        if not _headers
+          _headers = {...HEADERS}
+        _headers[key] = val
         true
 
       apply:(_,self,args)=>
-        call prefix, args
+        if _headers
+          h = _headers
+          _headers = undefined
+        else
+          h = HEADERS
+        call prefix, args, h
     )
 
   [
