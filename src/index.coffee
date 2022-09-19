@@ -14,7 +14,7 @@ HEADERS = { 'content-type':'' }
 
 < (Throw,sdkUrl)=>
 
-  call = (func, args, headers)=>
+  call = (headers, func, args)=>
     r = await fetch(
       sdkUrl+func
       method: 'POST'
@@ -53,7 +53,7 @@ HEADERS = { 'content-type':'' }
           _headers = undefined
         else
           h = HEADERS
-        call prefix, args, h
+        call h, prefix, args
     )
 
   [
