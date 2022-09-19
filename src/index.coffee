@@ -50,7 +50,7 @@ HEADERS = { 'content-type':'-' }
         if not headers
           headers = {...HEADERS}
         headers[key] = val
-        return
+        true
 
       apply:(_,self,args)=>
         call prefix, args
