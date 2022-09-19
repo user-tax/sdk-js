@@ -1,0 +1,27 @@
+{
+  "name": "@user.tax/sdk",
+  "version": "0.0.17",
+  "type": "module",
+  "repository": "git@github.com:user-tax/sdk-js",
+  "author": "i@user.tax",
+  "license": "MIT",
+  "exports": {
+    ".": "./lib/index.js",
+    "./*": "./lib/*"
+  },
+  "files": [
+    "lib/*"
+  ],
+  "devDependencies": {
+    "@babel/cli": "^7.18.10",
+    "@babel/core": "^7.19.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.18.6",
+    "@iuser/node-loader": "^0.0.21",
+    "coffee_plus": "^0.0.39",
+    "uglify-js": "^3.17.0"
+  },
+  "dependencies": {
+    "@iuser/sleep": "^0.0.2",
+    "msgpackr": "^1.7.0-beta1"
+  }
+}
