@@ -10,9 +10,14 @@ dump = (args)=>
     return JSON.stringify args
   ''
 
-HEADERS = { 'content-type':'' }
+< (Throw,sdkUrl,lang)=>
+  HEADERS = { 'content-type':'' }
+  conf = (s,lang)=>
+    sdkUrl = s
+    HEADERS['accept-language'] = lang or ''
+    return
 
-< (Throw,sdkUrl)=>
+  conf sdkUrl, lang
 
   call = (headers, func, args)=>
     r = await fetch(
@@ -60,8 +65,6 @@ HEADERS = { 'content-type':'' }
 
   [
     proxy('')
-    (s)=>
-      sdkUrl = s
-      return
+    conf
   ]
 
