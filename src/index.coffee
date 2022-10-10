@@ -10,7 +10,7 @@ dump = (args)=>
     return JSON.stringify args
   ''
 
-< (Throw,args...)=>
+< (Throw)=>
   + sdkUrl
   HEADERS = { 'content-type':'' }
 
@@ -25,8 +25,6 @@ dump = (args)=>
       delete HEADERS.id
     Object.assign HEADERS, o
     return
-
-  conf ...args
 
   call = (headers, func, args)=>
     r = await fetch(
