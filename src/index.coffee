@@ -10,14 +10,22 @@ dump = (args)=>
     return JSON.stringify args
   ''
 
-< (Throw,sdkUrl,lang)=>
+< (Throw,args...)=>
+  + sdkUrl
   HEADERS = { 'content-type':'' }
-  conf = (s,lang)=>
-    sdkUrl = s
-    HEADERS['accept-language'] = lang or ''
+
+  conf = (url,lang,id)=>
+    sdkUrl = url
+    Object.assign(
+      HEADERS
+      {
+        id
+        'accept-language': lang or ''
+      }
+    )
     return
 
-  conf sdkUrl, lang
+  conf ...args
 
   call = (headers, func, args)=>
     r = await fetch(
