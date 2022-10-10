@@ -21,6 +21,8 @@ dump = (args)=>
     }
     if id != location.hostname
       o.id = id
+    else
+      delete HEADERS.id
     Object.assign HEADERS, o
     return
 
