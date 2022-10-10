@@ -16,13 +16,12 @@ dump = (args)=>
 
   conf = (url,lang,id)=>
     sdkUrl = url
-    Object.assign(
-      HEADERS
-      {
-        id
-        'accept-language': lang or ''
-      }
-    )
+    o = {
+      'accept-language': lang or ''
+    }
+    if id != location.hostname
+      o.id = id
+    Object.assign HEADERS, o
     return
 
   conf ...args
