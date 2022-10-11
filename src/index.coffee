@@ -12,12 +12,12 @@ dump = (args)=>
 
 < (Throw)=>
   + sdkUrl
-  HEADERS = { 'content-type':'' }
+  HEADERS = { 'Content-Type':'' }
 
   conf = (url,lang,id)=>
     sdkUrl = url
     o = {
-      'accept-language': lang or ''
+      'Accept-Language': lang or ''
     }
     if id
       o.id = id
