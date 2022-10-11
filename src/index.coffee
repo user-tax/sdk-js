@@ -10,9 +10,11 @@ dump = (args)=>
     return JSON.stringify args
   ''
 
+ContentType = 'Content-Type'
+
 < (Throw)=>
   + sdkUrl
-  HEADERS = { 'Content-Type':'' }
+  HEADERS = { }
 
   conf = (url,lang,id)=>
     sdkUrl = url
@@ -26,20 +28,11 @@ dump = (args)=>
     Object.assign HEADERS, o
     return
 
-  call = (headers, func, args)=>
-    r = await fetch(
-      sdkUrl+func
-      {
-        body: dump args
-        credentials: 'include'
-        headers
-        method: 'POST'
-      }
-    )
+  call = (url, o)=>
+    r = await fetch(url,o)
     if not [200,304].includes(r.status)
-      return await Throw r, call, headers, func, args
+      return await Throw r, call, url, o
     bin = await r.arrayBuffer()
-
     if bin.byteLength
       return unpack new Uint8Array(bin)
     #, { moreTypes:true int64AsNumber:true }
@@ -67,8 +60,17 @@ dump = (args)=>
           h = _headers
           _headers = undefined
         else
-          h = HEADERS
-        call h, prefix, args
+          h = {...HEADERS}
+        o = {
+          credentials: 'include'
+          headers: h
+          method: 'POST'
+        }
+        if args.length
+          o.body = dump args
+          if ContentType not of h
+            h[ContentType] = ''
+        call sdkUrl+prefix, o
     )
 
   [
