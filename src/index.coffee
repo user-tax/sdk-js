@@ -32,6 +32,7 @@ dump = (args)=>
       {
         method: 'POST'
         body: dump args
+        credentials: 'include'
         headers
       }
     )
