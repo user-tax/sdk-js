@@ -30,10 +30,10 @@ dump = (args)=>
     r = await fetch(
       sdkUrl+func
       {
-        method: 'POST'
         body: dump args
-        credentials: true
+        credentials: 'include'
         headers
+        method: 'POST'
       }
     )
     if not [200,304].includes(r.status)
