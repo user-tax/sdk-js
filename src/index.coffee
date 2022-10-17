@@ -29,7 +29,10 @@ ContentType = 'Content-Type'
     return
 
   call = (url, o)=>
-    r = await fetch(url,o)
+    try
+      r = await fetch(url,o)
+    catch err
+      return await Throw err, call, url, o
     if not [200,304].includes(r.status)
       return await Throw r, call, url, o
     bin = await r.arrayBuffer()
