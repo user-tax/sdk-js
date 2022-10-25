@@ -15,9 +15,16 @@ ContentType = 'Content-Type'
 < (Throw)=>
   + sdkUrl
 
-  HEADERS = { }
+  HEADERS = {}
 
   _call = (url, o)=>
+    {headers} = o
+    if headers
+      for [k,v] from Object.entries HEADERS
+        if k not of headers
+          headers[k]=v
+    else
+      o.headers = HEADERS
     try
       r = await fetch(url,o)
     catch err
@@ -35,22 +42,25 @@ ContentType = 'Content-Type'
     new Promise (resolve,reject)=>
       todo.push [url,o,resolve,reject]
 
-  conf = (url,lang,id)=>
+  conf = (url,lang,O)=>
     sdkUrl = url
+
+    o = {
+      'Accept-Language': lang or ''
+    }
+
+    if O
+      o.O = O
+    else
+      delete HEADERS.O
+
+    Object.assign HEADERS, o
+
     call = _call
     for args from todo
       call(...args[..1]).then(..args[2..])
 
     todo = []
-
-    o = {
-      'Accept-Language': lang or ''
-    }
-    if id
-      o.id = id
-    else
-      delete HEADERS.id
-    Object.assign HEADERS, o
     return
 
 
@@ -67,7 +77,7 @@ ContentType = 'Content-Type'
 
       set: (_, key, val)=>
         if not _headers
-          _headers = {...HEADERS}
+          _headers = {}
         _headers[key] = val
         true
 
@@ -75,8 +85,6 @@ ContentType = 'Content-Type'
         if _headers
           h = _headers
           _headers = undefined
-        else
-          h = {...HEADERS}
         o = {
           credentials: 'include'
           headers: h
