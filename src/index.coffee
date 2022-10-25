@@ -26,7 +26,7 @@ ContentType = 'Content-Type'
     else
       o.headers = HEADERS
     try
-      r = await fetch(url,o)
+      r = await fetch(sdkUrl+url,o)
     catch err
       return await Throw err, call, url, o
     if not [200,304].includes(r.status)
@@ -94,7 +94,7 @@ ContentType = 'Content-Type'
           o.body = dump args
           if ContentType not of h
             h[ContentType] = ''
-        call sdkUrl+prefix, o
+        call prefix, o
     )
 
   [
