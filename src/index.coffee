@@ -10,13 +10,12 @@ dump = (args)=>
     return JSON.stringify args
   ''
 
-ContentType = 'Content-Type'
 
 < (Throw)=>
   + sdkUrl
 
   HEADERS = {
-    ContentType:''
+    'Content-Type':''
   }
 
   _call = (url, o)=>
