@@ -14,21 +14,10 @@ ContentType = 'Content-Type'
 
 < (Throw)=>
   + sdkUrl
+
   HEADERS = { }
 
-  conf = (url,lang,id)=>
-    sdkUrl = url
-    o = {
-      'Accept-Language': lang or ''
-    }
-    if id
-      o.id = id
-    else
-      delete HEADERS.id
-    Object.assign HEADERS, o
-    return
-
-  call = (url, o)=>
+  _call = (url, o)=>
     try
       r = await fetch(url,o)
     catch err
@@ -40,6 +29,30 @@ ContentType = 'Content-Type'
       return unpack new Uint8Array(bin)
     #, { moreTypes:true int64AsNumber:true }
     return
+
+  todo = []
+  call = (url,o)=>
+    new Promise (resolve,reject)=>
+      todo.push [url,o,resolve,reject]
+
+  conf = (url,lang,id)=>
+    sdkUrl = url
+    call = _call
+    for args from todo
+      call(...args[..1]).then(..args[2..])
+
+    todo = []
+
+    o = {
+      'Accept-Language': lang or ''
+    }
+    if id
+      o.id = id
+    else
+      delete HEADERS.id
+    Object.assign HEADERS, o
+    return
+
 
   + _headers
 
