@@ -58,7 +58,7 @@ ContentType = 'Content-Type'
 
     call = _call
     for args from todo
-      call(...args[..1]).then(..args[2..])
+      call(...args[..1]).then(...args[2..])
 
     todo = []
     return
