@@ -15,7 +15,9 @@ ContentType = 'Content-Type'
 < (Throw)=>
   + sdkUrl
 
-  HEADERS = {}
+  HEADERS = {
+    ContentType:''
+  }
 
   _call = (url, o)=>
     {headers} = o
@@ -92,8 +94,6 @@ ContentType = 'Content-Type'
         }
         if args.length
           o.body = dump args
-          if ContentType not of h
-            h[ContentType] = ''
         call prefix, o
     )
 
