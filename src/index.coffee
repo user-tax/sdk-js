@@ -10,7 +10,6 @@ dump = (args)=>
     return JSON.stringify args
   ''
 
-
 < (Throw)=>
   + sdkUrl
 
@@ -43,19 +42,10 @@ dump = (args)=>
     new Promise (resolve,reject)=>
       todo.push [url,o,resolve,reject]
 
-  conf = (url,lang,O)=>
+  conf = (url,lang)=>
     sdkUrl = url
 
-    o = {
-      'Accept-Language': lang or ''
-    }
-
-    if O
-      o.O = O
-    else
-      delete HEADERS.O
-
-    Object.assign HEADERS, o
+    HEADERS['Accept-Language'] = lang or ''
 
     call = _call
     for args from todo
