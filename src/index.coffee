@@ -40,7 +40,7 @@ dump = (args)=>
   todo = []
   call = (url,o)=>
     new Promise (resolve,reject)=>
-      todo.push [url,o,resolve,reject]
+      todo.unshift [url,o,resolve,reject]
 
   conf = (url,lang)=>
     sdkUrl = url
@@ -48,10 +48,12 @@ dump = (args)=>
     HEADERS['Accept-Language'] = lang or ''
 
     call = _call
-    for args from todo
-      call(...args[..1]).then(...args[2..])
-
-    todo = []
+    loop
+      args = todo.pop()
+      if args
+        call(...args[..1]).then(...args[2..])
+      else
+        break
     return
 
 

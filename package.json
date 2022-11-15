@@ -13,15 +13,15 @@
     "lib/*"
   ],
   "devDependencies": {
-    "@babel/cli": "^7.18.10",
-    "@babel/core": "^7.19.0",
-    "@babel/plugin-transform-modules-commonjs": "^7.18.6",
-    "@iuser/node-loader": "^0.0.21",
-    "coffee_plus": "^0.0.39",
-    "uglify-js": "^3.17.0"
+    "@babel/cli": "^7.19.3",
+    "@babel/core": "^7.20.2",
+    "@babel/plugin-transform-modules-commonjs": "^7.19.6",
+    "@iuser/node-loader": "^0.0.46",
+    "coffee_plus": "^0.0.43",
+    "uglify-js": "^3.17.4"
   },
   "dependencies": {
     "@iuser/sleep": "^0.0.2",
-    "msgpackr": "^1.7.0-beta1"
+    "msgpackr": "^1.8.0"
   }
 }
