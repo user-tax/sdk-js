@@ -1,6 +1,7 @@
 > msgpackr > unpack
 
-< unpack
+`export {unpack} from 'msgpackr'`
+
 
 dump = (args)=>
   {length} = args
