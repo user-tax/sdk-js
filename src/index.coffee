@@ -1,8 +1,5 @@
 > msgpackr > unpack
 
-`export {unpack} from 'msgpackr'`
-
-
 dump = (args)=>
   {length} = args
   if length
