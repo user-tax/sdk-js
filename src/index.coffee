@@ -37,25 +37,14 @@ dump = (args)=>
     #, { moreTypes:true int64AsNumber:true }
     return
 
-  todo = []
-  call = (url,o)=>
-    new Promise (resolve,reject)=>
-      todo.unshift [url,o,resolve,reject]
-
-  conf = (url,lang)=>
+  init = (url,lang)=>
+    confLang lang
     sdkUrl = url
-
-    HEADERS['Accept-Language'] = lang or ''
-
-    call = _call
-    loop
-      args = todo.pop()
-      if args
-        call(...args[..1]).then(...args[2..])
-      else
-        break
     return
 
+  confLang = (lang)=>
+    HEADERS['Accept-Language'] = lang or ''
+    return
 
   + _headers
 
@@ -90,6 +79,7 @@ dump = (args)=>
 
   [
     proxy('')
-    conf
+    init
+    confLang
   ]
 
