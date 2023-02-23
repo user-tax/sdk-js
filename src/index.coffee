@@ -17,7 +17,7 @@ dump = (args)=>
     'Content-Type':''
   }
 
-  _call = (url, o)=>
+  call = (url, o)=>
     {headers} = o
     if headers
       for [k,v] from Object.entries HEADERS
