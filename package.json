@@ -21,7 +21,6 @@
     "uglify-js": "^3.17.4"
   },
   "dependencies": {
-    "@u7/sleep": "^0.0.3",
     "msgpackr": "^1.8.3"
   }
 }
